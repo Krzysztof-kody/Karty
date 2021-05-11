@@ -50,6 +50,7 @@ public class Panel extends JPanel implements MouseListener {
                         }
                         else{
                             L1.watek.sleep = 15;
+                            L1.watek.rots = 5;
                             System.out.println("nope :(");
                             System.out.println("---->   obejrzyj reklamę by kontynuować   <----");
                         }
