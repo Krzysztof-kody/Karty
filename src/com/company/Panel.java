@@ -1,0 +1,76 @@
+package com.company;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class Panel extends JPanel implements MouseListener {
+
+    Lacznik L1;
+    ImageIcon wall = new ImageIcon("src/com/company/table.jpg");
+    public Panel(Lacznik L){
+        L1 = L;
+        addMouseListener(this);
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+
+
+        //g.fillRect(0,0,640, 480);
+        g.drawImage(wall.getImage(),0,0,640,480, null);
+        for(Karta k: L1.karty){
+            g.drawImage(k.getGraphics(),k.x, k.y, null);
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+        try {
+            if(L1.watek.szufluj != -2)
+                L1.shuffle();
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
+
+        if(L1.watek.szufluj==-2) {
+            for (Karta k : L1.karty) {
+                if (e.getY() >= k.y && e.getY() <= k.y + 200)
+                    if (e.getX() >= k.x && e.getX() <= k.x + 100) {
+                        if(k.wartosc == 1)
+                            L1.watek.sleep--;
+                        else
+                            L1.watek.sleep = 15;
+                        if (k.strona == 1) k.strona = 0;
+                        else
+                            k.strona = 1;
+                    }
+            }
+        L1.watek.szufluj = -1;
+        }
+        repaint();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+}
