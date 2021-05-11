@@ -4,6 +4,7 @@ public class Watek extends Thread{
     Lacznik L1;
     int szufluj = -1;
     public int sleep = 15;
+    public int rots = 5;
 
     public void shuffle() throws InterruptedException {
         if(szufluj > -1){
@@ -13,7 +14,7 @@ public class Watek extends Thread{
             L1.Stol.repaint();
             Thread.sleep(1000);
 
-            for(int i = 0; i<10; i++) {
+            for(int i = 0; i<rots; i++) {
                 szufluj = (int)(Math.random()*2);
                 for (int k = 0; k < 11; k++) {
                     L1.karty.get(szufluj).setPosition(L1.karty.get(szufluj).x + 10, L1.karty.get(szufluj).y + 10);
