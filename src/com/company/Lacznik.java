@@ -9,6 +9,7 @@ public class Lacznik {
     public Panel Stol = new Panel(this);
     ArrayList<Karta> karty = new ArrayList<>();
     public Watek watek = new Watek(this);
+    public boolean wait = false;
 
     public Lacznik(){
         karty.add(new Karta(0));

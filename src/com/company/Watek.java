@@ -7,6 +7,7 @@ public class Watek extends Thread{
     public int rots = 5;
 
     public void shuffle() throws InterruptedException {
+        L1.wait = true;
         if(szufluj > -1){
 
             for(Karta k: L1.karty)
@@ -35,7 +36,7 @@ public class Watek extends Thread{
             szufluj = -2;
 
         }
-
+        L1.wait = false;
     }
 
     public Watek(Lacznik L){

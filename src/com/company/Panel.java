@@ -28,40 +28,47 @@ public class Panel extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
-        try {
-            if(L1.watek.szufluj != -2)
-                L1.shuffle();
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
-        }
-
-        if(L1.watek.szufluj==-2) {
-            for (Karta k : L1.karty) {
-                if (e.getY() >= k.y && e.getY() <= k.y + 200)
-                    if (e.getX() >= k.x && e.getX() <= k.x + 100) {
-                        if(k.wartosc == 1) {
-                            System.out.println("LVL " + (15- L1.watek.sleep+1) + "_" + (L1.watek.rots-4));
-                            L1.watek.rots++;
-                            if(L1.watek.rots >15 ) {
-                                L1.watek.rots = 5;
-                                L1.watek.sleep--;
-                            }
-                        }
-                        else{
-                            L1.watek.sleep = 15;
-                            L1.watek.rots = 5;
-                            System.out.println("nope :(");
-                            System.out.println("---->   obejrzyj reklamę by kontynuować   <----");
-                        }
-                        if (k.strona == 1) k.strona = 0;
-                        else
-                            k.strona = 1;
-                    }
+        boolean loose = false;
+        if(L1.wait==false) {
+            try {
+                if (L1.watek.szufluj != -2)
+                    L1.shuffle();
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
             }
-        L1.watek.szufluj = -1;
+
+            if (L1.watek.szufluj == -2) {
+                for (Karta k : L1.karty) {
+                    if (e.getY() >= k.y && e.getY() <= k.y + 200)
+                        if (e.getX() >= k.x && e.getX() <= k.x + 100) {
+                            if (k.wartosc == 1) {
+                                System.out.println("LVL " + (15 - L1.watek.sleep + 1) + "_" + (L1.watek.rots - 4));
+                                L1.watek.rots++;
+                                if (L1.watek.rots > 15) {
+                                    L1.watek.rots = 5;
+                                    L1.watek.sleep--;
+                                }
+                            } else {
+                                L1.watek.sleep = 15;
+                                L1.watek.rots = 5;
+                                loose = true;
+                                for (Karta kk : L1.karty) {
+                                    kk.strona = 1;
+                                    repaint();
+                                }
+                                System.out.println("nope :(");
+                                System.out.println("---->   obejrzyj reklamę by kontynuować   <----");
+                            }
+                            if (k.strona == 1 && loose == false) k.strona = 0;
+                            else
+                                k.strona = 1;
+                            loose = false;
+                        }
+                }
+                L1.watek.szufluj = -1;
+            }
+            repaint();
         }
-        repaint();
     }
 
     @Override
