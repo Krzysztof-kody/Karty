@@ -17,9 +17,6 @@ public class Panel extends JPanel implements MouseListener {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
-
-        //g.fillRect(0,0,640, 480);
         g.drawImage(wall.getImage(),0,0,640,480, null);
         for(Karta k: L1.karty){
             g.drawImage(k.getGraphics(),k.x, k.y, null);
@@ -59,7 +56,8 @@ public class Panel extends JPanel implements MouseListener {
                                 System.out.println("nope :(");
                                 System.out.println("---->   obejrzyj reklamę by kontynuować   <----");
                             }
-                            if (k.strona == 1 && loose == false) k.strona = 0;
+                            if (k.strona == 1 && loose == false)
+                                k.strona = 0;
                             else
                                 k.strona = 1;
                             loose = false;
